@@ -1,0 +1,30 @@
+stages:
+  get_data:
+    cmd: python3 src/dataset.py
+    deps:
+    - src/dataset.py
+    outs:
+    - assets/data/
+  featurize:
+    cmd: python3 src/features.py
+    deps:
+    - assets/data
+    - src/features.py
+    outs:
+    - assets/features
+  train:
+    cmd: python3 src/train.py
+    deps:
+    - assets/features
+    - src/train.py
+    outs:
+    - assets/models
+  eval:
+    cmd: python3 src/evaluate.py
+    deps:
+    - assets/features
+    - assets/models
+    - src/evaluate.py
+    metrics:
+    - assets/metrics.json:
+        cache: false

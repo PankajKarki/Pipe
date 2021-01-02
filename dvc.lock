@@ -1,0 +1,59 @@
+get_data:
+  cmd: python3 src/dataset.py
+  deps:
+  - path: src/dataset.py
+    md5: 369d2347a3d68bf1e1ee0292227a56e5
+    size: 725
+  outs:
+  - path: assets/data/
+    md5: 6ca07cc8d187d6108094e0c34628f3b7.dir
+    size: 694078
+    nfiles: 2
+featurize:
+  cmd: python3 src/features.py
+  deps:
+  - path: assets/data
+    md5: 6ca07cc8d187d6108094e0c34628f3b7.dir
+    size: 694078
+    nfiles: 2
+  - path: src/features.py
+    md5: 74bdd6d4c2ffcaae3c5ba2b0cd909ea3
+    size: 979
+  outs:
+  - path: assets/features
+    md5: f61c170527b6855a5ae076ca655e4d57.dir
+    size: 75229
+    nfiles: 4
+train:
+  cmd: python3 src/train.py
+  deps:
+  - path: assets/features
+    md5: f61c170527b6855a5ae076ca655e4d57.dir
+    size: 75229
+    nfiles: 4
+  - path: src/train.py
+    md5: 68788d30171af413dd82fad5cffba509
+    size: 542
+  outs:
+  - path: assets/models
+    md5: 99613368fd72332ddf164e275911d37e.dir
+    size: 7400994
+    nfiles: 1
+eval:
+  cmd: python3 src/evaluate.py
+  deps:
+  - path: assets/features
+    md5: f61c170527b6855a5ae076ca655e4d57.dir
+    size: 75229
+    nfiles: 4
+  - path: assets/models
+    md5: 99613368fd72332ddf164e275911d37e.dir
+    size: 7400994
+    nfiles: 1
+  - path: src/evaluate.py
+    md5: a4c902154290700a2c16ddc28cab5151
+    size: 593
+  outs:
+  - path: assets/metrics.json
+    md5: 64ecb09889cf84631044815b28f14ea9
+    size: 61
