@@ -64,7 +64,6 @@ python-dateutil==2.8.1
 python-slugify==4.0.1
 pytz==2020.4
 PyYAML==5.3.1
-regression-model==0.1.0
 requests==2.25.1
 rich==9.5.1
 rsa==4.6
